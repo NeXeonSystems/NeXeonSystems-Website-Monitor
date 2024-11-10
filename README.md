@@ -105,7 +105,9 @@ The status page will show:
 
 Once everything is set up and the sites are running, your site monitor page will look like this:
 
-![Example Monitor](https://imgur.com/LgVWzT6.jpg)
+![Example Monitor1](https://imgur.com/hZ5JCh9.jpg)
+![Example Monitor2](https://imgur.com/9eD5nId.jpg)
+![Example Monitor3](https://imgur.com/dulfMyk.jpg)
 
 - Green circle for sites that are **up**.
 - Red circle for sites that are **down**.
@@ -116,6 +118,7 @@ Once everything is set up and the sites are running, your site monitor page will
 
 - **v1.0.0** (November 9, 2024): Added real-time status monitor with enhanced CSS and improved layout.
 - **v1.1.0** (November 10, 2024): Updated CSS to support background images for enhanced design. (You can edit the background image in the CSS.)
+- **v1.1.1** (November 11, 2024): Enhanced Design with Interactive Chart & New CSS Styling. Added .env configuration
 
 ---------------------------------------------------
 All copyrights goes to NeXeonSystems & Nethuka 2024
