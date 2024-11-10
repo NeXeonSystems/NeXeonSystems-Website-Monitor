@@ -115,7 +115,7 @@ Once everything is set up and the sites are running, your site monitor page will
 ### Latest Updates
 
 - **v1.0.0** (November 9, 2024): Added real-time status monitor with enhanced CSS and improved layout.
-- **v1.1.0** (November 10, 2024): Updated CSS to support background images for enhanced design.
+- **v1.1.0** (November 10, 2024): Updated CSS to support background images for enhanced design. (You can edit the background image in the CSS.)
 
 ---------------------------------------------------
 All copyrights goes to NeXeonSystems & Nethuka 2024
