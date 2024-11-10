@@ -3,13 +3,17 @@ import axios from "axios";
 import http from "http";
 import { Server } from "socket.io";
 import { promises as fs } from "fs";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: { origin: "*", methods: ["GET", "POST"] }
 });
-const port = 3000;
+const port = process.env.PORT || 3000;
+const checkInterval = process.env.CHECK_EVERY_SECOND || 10000;
 
 async function loadConfig() {
   const configData = await fs.readFile("./config.json", "utf-8");
@@ -51,7 +55,7 @@ let config = { Sites: [] };
 async function initServer() {
   config = await loadConfig();
   checkSiteStatus(config);
-  setInterval(() => checkSiteStatus(config), 10000);
+  setInterval(() => checkSiteStatus(config), checkInterval);
   server.listen(port, () => console.log(`Server running on http://localhost:${port}`));
 }
 
