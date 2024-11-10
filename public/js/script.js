@@ -5,6 +5,7 @@ class NeXeonStatusChecker {
         this.lastUpdate = document.getElementById('last-update');
         this.initializeSocket();
         this.initializeTimeago();
+        this.chart = null;
     }
 
     initializeSocket() {
@@ -38,7 +39,7 @@ class NeXeonStatusChecker {
 
     createNodeElement(node) {
         return `
-            <div class="node ${node.status}" data-node="${this.escapeHtml(node.name)}">
+            <div class="node ${node.status}" data-node="${this.escapeHtml(node.name)}" onclick="window.statusChecker.showChart('${node.name}', '${node.status}')">
                 <div class="node-header">
                     <span class="status-indicator"></span>
                     <span class="node-name">${this.escapeHtml(node.name)}</span>
@@ -65,10 +66,10 @@ class NeXeonStatusChecker {
             console.error('Invalid status update received');
             return;
         }
-        
+
         const nodesHtml = statuses.map(node => this.createNodeElement(node)).join('');
         this.container.innerHTML = nodesHtml;
-        
+
         this.updateTimestamp();
         this.addNodeAnimations();
     }
@@ -97,6 +98,110 @@ class NeXeonStatusChecker {
 
     addSystemStatus(message) {
         console.log(`System Status: ${message}`);
+    }
+
+    showChart(nodeName, status) {
+        const chartContainer = document.createElement('div');
+        chartContainer.id = 'chart-container';
+        chartContainer.style.position = 'fixed';
+        chartContainer.style.top = '50%';
+        chartContainer.style.left = '50%';
+        chartContainer.style.transform = 'translate(-50%, -50%)';
+        chartContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+        chartContainer.style.padding = '40px';
+        chartContainer.style.borderRadius = '15px';
+        chartContainer.style.zIndex = '1000';
+        chartContainer.style.maxWidth = '90vw';
+        chartContainer.style.maxHeight = '80vh';
+        chartContainer.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
+
+        const closeButton = document.createElement('div');
+        closeButton.innerText = 'X';
+        closeButton.style.position = 'absolute';
+        closeButton.style.top = '10px';
+        closeButton.style.right = '10px';
+        closeButton.style.fontSize = '20px';
+        closeButton.style.color = '#ff0033';
+        closeButton.style.cursor = 'pointer';
+        closeButton.onclick = () => {
+            document.body.removeChild(chartContainer);
+            if (this.chart) {
+                this.chart.destroy();
+            }
+        };
+        chartContainer.appendChild(closeButton);
+
+        const canvas = document.createElement('canvas');
+        chartContainer.appendChild(canvas);
+        document.body.appendChild(chartContainer);
+
+        const chartData = {
+            labels: [nodeName],
+            datasets: [{
+                label: 'Status Value',
+                data: [status === 'up' ? 100 : 0],
+                backgroundColor: status === 'up' ? 'rgba(34, 197, 94, 0.8)' : 'rgba(239, 68, 68, 0.8)',
+                borderColor: status === 'up' ? 'rgba(34, 197, 94, 1)' : 'rgba(239, 68, 68, 1)',
+                borderWidth: 1,
+                hoverBackgroundColor: status === 'up' ? 'rgba(34, 197, 94, 1)' : 'rgba(239, 68, 68, 1)',
+                hoverBorderColor: 'rgba(255, 255, 255, 1)',
+            }]
+        };
+
+        if (this.chart) {
+            this.chart.destroy();
+        }
+
+        this.chart = new Chart(canvas, {
+            type: 'bar',
+            data: chartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animations: {
+                    tension: {
+                        duration: 1000,
+                        easing: 'easeOutBounce',
+                        from: 1,
+                        to: 0,
+                        loop: true
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: { display: false },
+                        ticks: {
+                            color: '#333',
+                            font: { size: 18 }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: { display: true, color: '#e0e0e0' },
+                        ticks: {
+                            color: '#333',
+                            font: { size: 18 }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        displayColors: false,
+                        callbacks: {
+                            label: (context) => `Status: ${context.raw === 100 ? 'Up' : 'Down'}`
+                        }
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
     }
 }
 
