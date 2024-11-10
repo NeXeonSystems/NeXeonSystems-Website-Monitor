@@ -49,14 +49,15 @@ body::before {
     overflow-y: auto;
     position: relative;
     z-index: 1;
+    background-color: transparent;
 }
 
 header {
     margin-bottom: 3rem;
     position: relative;
-    background-color: rgba(0, 0, 0, 0.6);
     padding: 1rem;
     border-radius: 8px;
+    background-color: transparent;
 }
 
 h1 {
@@ -83,9 +84,9 @@ footer {
     text-align: center;
     padding: 2rem;
     color: #f8fafc;
-    background-color: rgba(0, 0, 0, 0.6);
     font-size: 0.875rem;
     letter-spacing: 0.5px;
+    background-color: transparent;
 }
 
 #last-update {
@@ -98,12 +99,10 @@ footer {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     margin-top: 2rem;
     justify-items: center;
-    width: 100%;
 }
 
 .node {
     background: rgba(30, 41, 59, 0.7);
-    backdrop-filter: blur(10px);
     border-radius: 16px;
     padding: 1.75rem;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -113,16 +112,6 @@ footer {
     max-width: 340px;
     position: relative;
     overflow: hidden;
-}
-
-.node::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
 }
 
 .node:hover {
