@@ -105,7 +105,7 @@ The status page will show:
 
 Once everything is set up and the sites are running, your site monitor page will look like this:
 
-![Example Monitor](https://i.imgur.com/V3C1jb3.png)
+![Example Monitor](https://imgur.com/LgVWzT6.jpg)
 
 - Green circle for sites that are **up**.
 - Red circle for sites that are **down**.
