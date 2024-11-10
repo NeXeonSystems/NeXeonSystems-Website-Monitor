@@ -111,6 +111,8 @@ Once everything is set up and the sites are running, your site monitor page will
 
 - Green circle for sites that are **up**.
 - Red circle for sites that are **down**.
+- Chart will show green if the site is **up**.
+- Chart will show red if the site is **down**.
 
 ## Improvements
 
