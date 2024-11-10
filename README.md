@@ -12,6 +12,7 @@
 - **Mobile-responsive UI** for accessibility across all devices
 - **Socket.IO** integration for live updates without page refreshes
 - **Monitoring of multiple websites** with a scalable, easy-to-use interface
+- **Uses Chart.js** to make the users see if the site is down or up.
 
 ## Tech Stack
 
