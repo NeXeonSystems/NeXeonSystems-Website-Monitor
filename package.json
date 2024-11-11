@@ -17,6 +17,7 @@
     "nodemon": "*",
     "http": "*",
     "fs": "*"
+    "dotenv": "*"
   },
   "devDependencies": {},
   "engines": {
