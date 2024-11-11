@@ -9,14 +9,14 @@
     "dev": "nodemon server.js"
   },
   "author": "Nethuka",
-  "license": "Custom",
+  "license": "MIT",
   "dependencies": {
     "axios": "*",
     "express": "*",
     "socket.io": "*",
     "nodemon": "*",
     "http": "*",
-    "fs": "*"
+    "fs": "*",
     "dotenv": "*"
   },
   "devDependencies": {},
