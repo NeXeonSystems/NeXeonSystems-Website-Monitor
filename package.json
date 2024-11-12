@@ -1,6 +1,6 @@
 {
   "name": "nexeonsystems-status-monitor",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "A Real-Time Website Status Monitor.",
   "main": "server.js",
   "type": "module",
